@@ -1,249 +1,280 @@
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans)}
-.wrap{max-width:520px;margin:0 auto;padding:1.5rem 1rem}
-.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
-.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
-.field{margin-bottom:.85rem}
-.field label{display:block;font-size:14px;color:var(--color-text-secondary);margin-bottom:6px}
-.field input[type=number],.field select{width:100%;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:14px}
-.radio-group,.check-group{display:flex;flex-wrap:wrap;gap:8px}
-.radio-group label,.check-group label{display:flex;align-items:center;gap:6px;font-size:13px;padding:6px 12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;color:var(--color-text-primary);transition:background .15s,border-color .15s}
-.radio-group input,.check-group input{width:14px;height:14px;accent-color:#1D9E75}
-.radio-group label:has(input:checked),.check-group label:has(input:checked){background:#E1F5EE;border-color:#1D9E75;color:#085041}
-.btn{width:100%;padding:12px;background:#1D9E75;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:15px;font-weight:500;cursor:pointer;transition:background .15s}
-.btn:hover{background:#0F6E56}
-.btn:active{transform:scale(.98)}
-.result-hidden{display:none}
-.score-ring{display:flex;justify-content:center;margin:1rem 0}
-.ring-wrap{position:relative;width:100px;height:100px}
-.ring-wrap svg{width:100px;height:100px}
-.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.ring-num{font-size:26px;font-weight:500;color:var(--color-text-primary)}
-.ring-label{font-size:11px;color:var(--color-text-secondary)}
-.grade-badge{display:inline-block;padding:4px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:.5rem}
-.grade-excellent{background:#E1F5EE;color:#085041}
-.grade-good{background:#EAF3DE;color:#27500A}
-.grade-fair{background:#FAEEDA;color:#633806}
-.grade-weak{background:#FCEBEB;color:#791F1F}
-.verdict-row{display:flex;align-items:center;gap:8px;font-size:14px;padding:10px 12px;border-radius:var(--border-radius-md);margin-bottom:.75rem}
-.verdict-ok{background:var(--color-background-success,#E1F5EE);color:var(--color-text-success,#085041)}
-.verdict-warn{background:var(--color-background-warning,#FAEEDA);color:var(--color-text-warning,#633806)}
-.verdict-danger{background:var(--color-background-danger,#FCEBEB);color:var(--color-text-danger,#791F1F)}
-.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dot-ok{background:#1D9E75}.dot-warn{background:#BA7517}.dot-danger{background:#E24B4A}
-.risk-list{list-style:none;font-size:13px;color:var(--color-text-secondary)}
-.risk-list li{padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
-.risk-list li:last-child{border:none}
-.checklist{list-style:none}
-.checklist li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:14px}
-.checklist li:last-child{border:none}
-.checklist input[type=checkbox]{width:16px;height:16px;accent-color:#1D9E75;flex-shrink:0}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:auto;flex-shrink:0}
-.tag-base{background:#E6F1FB;color:#0C447C}
-.tag-dynamic{background:#E1F5EE;color:#085041}
-.page-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.25rem}
-.divider{height:0.5px;background:var(--color-border-tertiary);margin:1rem 0}
-.bar-wrap{height:6px;background:var(--color-background-secondary);border-radius:3px;margin:12px 0 4px}
-.bar-fill{height:6px;border-radius:3px;transition:width .6s ease}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.app{width:100%;max-width:420px;margin:0 auto;padding:0 0 2rem;font-family:var(--font-sans)}
+.topbar{padding:1rem 1rem .5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:.75rem}
+.topbar-title{font-size:17px;font-weight:500;color:var(--color-text-primary)}
+.topbar-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.sec{padding:.75rem 1rem}
+.sec-label{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--color-text-tertiary,var(--color-text-secondary));text-transform:uppercase;margin-bottom:.6rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:.75rem}
+.field{margin-bottom:.9rem}
+.field:last-child{margin-bottom:0}
+.field-label{font-size:13px;color:var(--color-text-secondary);margin-bottom:.4rem;display:block}
+input[type=number]{width:100%;padding:10px 12px;font-size:15px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);-webkit-appearance:none}
+.pill-group{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:flex;align-items:center;gap:5px;padding:8px 13px;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:13px;cursor:pointer;color:var(--color-text-primary);background:var(--color-background-primary);min-height:36px;user-select:none;transition:background .15s,border-color .15s}
+.pill input{width:15px;height:15px;accent-color:#1D9E75;flex-shrink:0}
+.pill.sel{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+.slider-row{display:flex;align-items:center;gap:10px}
+.slider-row input[type=range]{flex:1;height:4px;accent-color:#1D9E75}
+.slider-val{font-size:14px;font-weight:500;min-width:42px;text-align:right;color:var(--color-text-primary)}
+.cta{margin:0 1rem;padding:13px;background:#1D9E75;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:15px;font-weight:500;width:calc(100% - 2rem);cursor:pointer;letter-spacing:.01em}
+.cta:active{background:#0F6E56;transform:scale(.98)}
+.hidden{display:none}
+.result-wrap{margin-top:.5rem}
+.score-card{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin:0 1rem .75rem}
+.ring-svg{width:76px;height:76px;flex-shrink:0}
+.score-info{flex:1;min-width:0}
+.score-num{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1}
+.score-unit{font-size:12px;color:var(--color-text-secondary);margin-top:2px;margin-bottom:.4rem}
+.badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:500}
+.b-ex{background:#E1F5EE;color:#085041}
+.b-good{background:#EAF3DE;color:#27500A}
+.b-fair{background:#FAEEDA;color:#633806}
+.b-weak{background:#FCEBEB;color:#791F1F}
+.verdict{margin:0 1rem .75rem;padding:10px 13px;border-radius:var(--border-radius-md);font-size:13px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.v-ok{background:#E1F5EE;color:#085041}
+.v-warn{background:#FAEEDA;color:#633806}
+.v-bad{background:#FCEBEB;color:#791F1F}
+.dot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.d-ok{background:#1D9E75}.d-warn{background:#BA7517}.d-bad{background:#E24B4A}
+.risk-card{margin:0 1rem .75rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.risk-head{padding:.65rem 1rem;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.risk-item{padding:.6rem 1rem;font-size:13px;color:var(--color-text-primary);border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.risk-item:last-child{border-bottom:none}
+.risk-dot{width:5px;height:5px;border-radius:50%;background:#BA7517;margin-top:6px;flex-shrink:0}
+.list-card{margin:0 1rem .75rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.list-head{padding:.65rem 1rem;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.list-item{display:flex;align-items:center;gap:12px;padding:.75rem 1rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.list-item:last-child{border-bottom:none}
+.list-item input[type=checkbox]{width:18px;height:18px;accent-color:#1D9E75;flex-shrink:0}
+.list-item label{flex:1;font-size:14px;color:var(--color-text-primary);cursor:pointer;line-height:1.4}
+.tag{font-size:11px;padding:2px 8px;border-radius:10px;flex-shrink:0}
+.t-base{background:#E6F1FB;color:#0C447C}
+.t-dyn{background:#E1F5EE;color:#085041}
+.reset-btn{display:block;margin:0 1rem;padding:11px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:14px;width:calc(100% - 2rem);cursor:pointer;text-align:center}
+.reset-btn:active{transform:scale(.98)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:.25rem 1rem .75rem}
 </style>
 
-<div class="wrap">
-  <h2 class="sr-only">旅游体能评估与行李清单管理工具</h2>
-  <div class="page-title">旅游体能评估</div>
-  <div class="page-sub">导游辅助工具 · 评估游客出行能力</div>
+<h2 class="sr-only">旅游体能评估与行李清单管理工具，适用于手机端</h2>
 
-  <div class="card">
-    <div class="section-title">基本信息</div>
-    <div class="field">
-      <label>年龄</label>
-      <input type="number" id="age" min="5" max="100" placeholder="请输入年龄" />
-    </div>
-    <div class="field">
-      <label>性别</label>
-      <div class="radio-group">
-        <label><input type="radio" name="gender" value="male" checked> 男</label>
-        <label><input type="radio" name="gender" value="female"> 女</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>日常锻炼频次</label>
-      <div class="radio-group" style="flex-direction:column;gap:6px">
-        <label><input type="radio" name="exercise" value="0" checked> 几乎不运动</label>
-        <label><input type="radio" name="exercise" value="1"> 每周 1–2 次</label>
-        <label><input type="radio" name="exercise" value="2"> 每周 3–5 次</label>
-        <label><input type="radio" name="exercise" value="3"> 每天运动</label>
-      </div>
-    </div>
+<div class="app">
+  <div class="topbar">
+    <div class="topbar-title">旅游体能评估</div>
+    <div class="topbar-sub">导游辅助工具 · 评估游客出行能力</div>
   </div>
 
-  <div class="card">
-    <div class="section-title">出行信息</div>
-    <div class="field">
-      <label>出行方式（可多选）</label>
-      <div class="check-group" style="flex-direction:column;gap:6px">
-        <label><input type="checkbox" name="transport" value="walk"> 步行为主</label>
-        <label><input type="checkbox" name="transport" value="transit"> 公交 / 地铁</label>
-        <label><input type="checkbox" name="transport" value="drive"> 自驾</label>
-        <label><input type="checkbox" name="transport" value="cable"> 缆车 / 观光车</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>景点间步行距离（公里）</label>
-      <div style="display:flex;align-items:center;gap:12px">
-        <input type="range" id="dist" min="0" max="30" value="5" step="1" style="flex:1" oninput="document.getElementById('dist-out').textContent=this.value">
-        <span id="dist-out" style="font-size:14px;font-weight:500;min-width:36px">5 km</span>
-      </div>
-    </div>
-    <div class="field">
-      <label>当前天气</label>
-      <div class="radio-group">
-        <label><input type="radio" name="weather" value="cool" checked> 凉爽</label>
-        <label><input type="radio" name="weather" value="hot"> 炎热</label>
-        <label><input type="radio" name="weather" value="rainy"> 雨天</label>
-      </div>
-    </div>
-  </div>
-
-  <button class="btn" onclick="evaluate()">开始评估</button>
-
-  <div id="result" class="result-hidden">
-    <div style="height:1rem"></div>
-    <div class="card">
-      <div class="section-title">体能评估结果</div>
-      <div class="score-ring">
-        <div class="ring-wrap">
-          <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--color-border-tertiary)" stroke-width="8"/>
-            <circle id="ring-arc" cx="50" cy="50" r="42" fill="none" stroke="#1D9E75" stroke-width="8"
-              stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"
-              transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .8s ease,stroke .4s"/>
-          </svg>
-          <div class="ring-center">
-            <div class="ring-num" id="score-num">0</div>
-            <div class="ring-label">体能指数</div>
+  <div id="form-area">
+    <div class="sec">
+      <div class="sec-label">基本信息</div>
+      <div class="card">
+        <div class="field">
+          <span class="field-label">年龄</span>
+          <input type="number" id="age" min="5" max="100" placeholder="请输入年龄（岁）" inputmode="numeric">
+        </div>
+        <div class="field">
+          <span class="field-label">性别</span>
+          <div class="pill-group">
+            <label class="pill sel" id="pm"><input type="radio" name="gender" value="male" checked> 男</label>
+            <label class="pill" id="pf"><input type="radio" name="gender" value="female"> 女</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field-label">日常锻炼频次</span>
+          <div class="pill-group" style="flex-direction:column;gap:7px">
+            <label class="pill sel" data-ex="0"><input type="radio" name="ex" value="0" checked> 几乎不运动</label>
+            <label class="pill" data-ex="1"><input type="radio" name="ex" value="1"> 每周 1–2 次</label>
+            <label class="pill" data-ex="2"><input type="radio" name="ex" value="2"> 每周 3–5 次</label>
+            <label class="pill" data-ex="3"><input type="radio" name="ex" value="3"> 每天运动</label>
           </div>
         </div>
       </div>
-      <div style="text-align:center;margin-bottom:.75rem">
-        <span class="grade-badge" id="grade-badge">—</span>
-      </div>
-      <div id="verdict-box" class="verdict-row">
-        <div class="dot dot-ok" id="verdict-dot"></div>
-        <span id="verdict-text"></span>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="margin-bottom:.5rem">风险提示</div>
-      <ul class="risk-list" id="risk-list"></ul>
     </div>
 
-    <div class="card">
-      <div class="section-title">旅行必备清单</div>
-      <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:.75rem">根据您的体能和行程自动生成，勾选已准备好的物品</p>
-      <ul class="checklist" id="checklist"></ul>
+    <div class="sec">
+      <div class="sec-label">行程信息</div>
+      <div class="card">
+        <div class="field">
+          <span class="field-label">出行方式（可多选）</span>
+          <div class="pill-group" style="flex-direction:column;gap:7px">
+            <label class="pill" data-tr="walk"><input type="checkbox" name="tr" value="walk"> 步行为主</label>
+            <label class="pill" data-tr="transit"><input type="checkbox" name="tr" value="transit"> 公交 / 地铁</label>
+            <label class="pill" data-tr="drive"><input type="checkbox" name="tr" value="drive"> 自驾</label>
+            <label class="pill" data-tr="cable"><input type="checkbox" name="tr" value="cable"> 缆车 / 观光车</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field-label">景点间步行距离（公里）</span>
+          <div class="slider-row">
+            <input type="range" id="dist" min="0" max="30" value="5" step="1">
+            <span class="slider-val" id="dv">5 km</span>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field-label">当前天气</span>
+          <div class="pill-group">
+            <label class="pill sel" data-wx="cool"><input type="radio" name="wx" value="cool" checked> 凉爽</label>
+            <label class="pill" data-wx="hot"><input type="radio" name="wx" value="hot"> 炎热</label>
+            <label class="pill" data-wx="rain"><input type="radio" name="wx" value="rain"> 雨天</label>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div style="text-align:center;margin-top:.5rem">
-      <button class="btn" style="background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);font-size:13px;padding:9px" onclick="reset()">重新评估</button>
+    <button class="cta" onclick="go()">开始评估</button>
+  </div>
+
+  <div id="result-area" class="hidden result-wrap">
+    <div class="sec">
+      <div class="sec-label">评估结果</div>
     </div>
-    <div style="height:1.5rem"></div>
+
+    <div class="score-card">
+      <svg class="ring-svg" viewBox="0 0 76 76">
+        <circle cx="38" cy="38" r="31" fill="none" stroke="var(--color-border-tertiary)" stroke-width="6"/>
+        <circle id="arc" cx="38" cy="38" r="31" fill="none" stroke="#1D9E75" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="194.8" stroke-dashoffset="194.8"
+          transform="rotate(-90 38 38)" style="transition:stroke-dashoffset .8s ease,stroke .4s"/>
+      </svg>
+      <div class="score-info">
+        <div class="score-num" id="snum">—</div>
+        <div class="score-unit">体能指数 / 100</div>
+        <span class="badge" id="sbadge">—</span>
+      </div>
+    </div>
+
+    <div class="verdict" id="verdict">
+      <div class="dot d-ok" id="vdot"></div>
+      <span id="vtext"></span>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-head">风险提示</div>
+      <div id="risks"></div>
+    </div>
+
+    <div class="list-card">
+      <div class="list-head">旅行必备清单</div>
+      <div id="checklist"></div>
+    </div>
+
+    <button class="reset-btn" onclick="rst()">重新评估</button>
+    <div style="height:1rem"></div>
   </div>
 </div>
 
 <script>
-document.getElementById('dist').addEventListener('input',function(){
-  document.getElementById('dist-out').textContent=this.value+' km';
-});
+(function(){
+  document.getElementById('dist').addEventListener('input',function(){
+    document.getElementById('dv').textContent=Math.round(this.value)+' km';
+  });
 
-function evaluate(){
-  const age=parseInt(document.getElementById('age').value)||30;
-  const gender=document.querySelector('input[name=gender]:checked').value;
-  const exercise=parseInt(document.querySelector('input[name=exercise]:checked').value);
-  const dist=parseInt(document.getElementById('dist').value);
-  const weather=document.querySelector('input[name=weather]:checked').value;
-  const transports=[...document.querySelectorAll('input[name=transport]:checked')].map(x=>x.value);
+  function stylePills(group,radio){
+    document.querySelectorAll(group).forEach(function(l){
+      l.classList.toggle('sel',l.querySelector('input').checked);
+    });
+  }
 
-  let score=100;
-  if(age<18) score-=5;
-  else if(age<=30) score+=0;
-  else if(age<=40) score-=5;
-  else if(age<=50) score-=12;
-  else if(age<=60) score-=22;
-  else if(age<=70) score-=35;
-  else score-=50;
-  if(gender==='female') score-=3;
-  const exBonus=[0,8,18,25];
-  score+=exBonus[exercise];
-  if(dist>3&&dist<=8) score-=5;
-  else if(dist>8&&dist<=15) score-=15;
-  else if(dist>15) score-=28;
-  score=Math.max(0,Math.min(100,score));
+  document.querySelectorAll('input[name=gender]').forEach(function(r){
+    r.addEventListener('change',function(){stylePills('.pill[id^=p]','gender');});
+  });
+  document.querySelectorAll('input[name=ex]').forEach(function(r){
+    r.addEventListener('change',function(){stylePills('[data-ex]','ex');});
+  });
+  document.querySelectorAll('input[name=wx]').forEach(function(r){
+    r.addEventListener('change',function(){stylePills('[data-wx]','wx');});
+  });
+  document.querySelectorAll('input[name=tr]').forEach(function(c){
+    c.addEventListener('change',function(){
+      this.closest('.pill').classList.toggle('sel',this.checked);
+    });
+  });
 
-  let grade,gradeClass,verdictClass,verdictDot,verdictText;
-  if(score>=80){grade='优秀';gradeClass='grade-excellent';verdictClass='verdict-ok';verdictDot='dot-ok';verdictText='体能良好，完全适合当前行程';}
-  else if(score>=60){grade='良好';gradeClass='grade-good';verdictClass='verdict-ok';verdictDot='dot-ok';verdictText='体能尚可，适合当前行程，注意适量休息';}
-  else if(score>=40){grade='一般';gradeClass='grade-fair';verdictClass='verdict-warn';verdictDot='dot-warn';verdictText='体能一般，建议缩短步行距离，多安排休息';}
-  else{grade='较弱';gradeClass='grade-weak';verdictClass='verdict-danger';verdictDot='dot-danger';verdictText='体能偏弱，建议以观光车/缆车代替步行为主';}
+  window.go=function(){
+    var age=parseInt(document.getElementById('age').value)||30;
+    var gender=document.querySelector('input[name=gender]:checked').value;
+    var ex=parseInt(document.querySelector('input[name=ex]:checked').value);
+    var dist=Math.round(parseInt(document.getElementById('dist').value));
+    var wx=document.querySelector('input[name=wx]:checked').value;
+    var transports=[].slice.call(document.querySelectorAll('input[name=tr]:checked')).map(function(x){return x.value;});
 
-  const risks=[];
-  if(dist>10&&score<60) risks.push('步行距离（'+dist+'km）超出当前体能建议范围，建议安排交通接驳');
-  if(age>=65) risks.push('年龄偏大，请随身携带应急卡及常用药物');
-  if(exercise===0&&dist>5) risks.push('日常缺乏运动，长距离步行易导致肌肉疲劳');
-  if(weather==='hot'&&score<60) risks.push('高温天气体能消耗加剧，需补充充足水分和防暑措施');
-  if(weather==='rainy') risks.push('雨天路面湿滑，注意防滑，建议穿防水运动鞋');
-  if(risks.length===0) risks.push('无明显风险，保持良好状态即可');
+    var s=100;
+    if(age<18) s-=5;
+    else if(age<=30) s+=0;
+    else if(age<=40) s-=5;
+    else if(age<=50) s-=12;
+    else if(age<=60) s-=22;
+    else if(age<=70) s-=35;
+    else s-=50;
+    if(gender==='female') s-=3;
+    s+=[0,8,18,25][ex];
+    if(dist>3&&dist<=8) s-=5;
+    else if(dist>8&&dist<=15) s-=15;
+    else if(dist>15) s-=28;
+    s=Math.max(0,Math.min(100,Math.round(s)));
 
-  const checklist=[];
-  const base=[
-    {name:'足量饮用水（至少500ml）',tag:'base'},
-    {name:'身份证件 / 证件复印件',tag:'base'},
-    {name:'手机 + 充电宝',tag:'base'},
-  ];
-  checklist.push(...base);
-  if(transports.includes('walk')||dist>3) checklist.push({name:'舒适运动鞋（防滑）',tag:'dynamic'});
-  if(dist>8) checklist.push({name:'护膝 / 护踝',tag:'dynamic'});
-  if(weather==='hot') checklist.push({name:'防晒霜 SPF50+',tag:'dynamic'},{name:'遮阳帽 / 太阳镜',tag:'dynamic'});
-  if(weather==='rainy') checklist.push({name:'折叠雨伞 / 雨衣',tag:'dynamic'},{name:'防水鞋套',tag:'dynamic'});
-  if(score<60) checklist.push({name:'能量棒 / 巧克力',tag:'dynamic'},{name:'常用非处方药（止痛、创可贴）',tag:'dynamic'});
-  if(age>=60) checklist.push({name:'个人常用药（血压药等）',tag:'dynamic'},{name:'紧急联系卡（过敏/病史）',tag:'dynamic'});
-  if(score>=60) checklist.push({name:'相机 / 手机支架',tag:'dynamic'});
+    var grade,bClass,vClass,dClass,vMsg;
+    if(s>=80){grade='优秀';bClass='b-ex';vClass='v-ok';dClass='d-ok';vMsg='体能良好，完全适合当前行程，保持水分补充即可。';}
+    else if(s>=60){grade='良好';bClass='b-good';vClass='v-ok';dClass='d-ok';vMsg='体能尚可，适合当前行程，建议适时安排休息。';}
+    else if(s>=40){grade='一般';bClass='b-fair';vClass='v-warn';dClass='d-warn';vMsg='体能一般，建议缩短步行路段，多安排中途休息。';}
+    else{grade='较弱';bClass='b-weak';vClass='v-bad';dClass='d-bad';vMsg='体能偏弱，建议以缆车或观光车代替长距离步行。';}
 
-  document.getElementById('score-num').textContent=score;
-  const offset=263.9*(1-score/100);
-  document.getElementById('ring-arc').style.strokeDashoffset=offset;
-  const colors={excellent:'#1D9E75',good:'#639922',fair:'#BA7517',weak:'#E24B4A'};
-  const ckey=score>=80?'excellent':score>=60?'good':score>=40?'fair':'weak';
-  document.getElementById('ring-arc').style.stroke=colors[ckey];
-  const badge=document.getElementById('grade-badge');
-  badge.textContent=grade;
-  badge.className='grade-badge '+gradeClass;
-  const vbox=document.getElementById('verdict-box');
-  vbox.className='verdict-row '+verdictClass;
-  document.getElementById('verdict-dot').className='dot '+verdictDot;
-  document.getElementById('verdict-text').textContent=verdictText;
+    document.getElementById('snum').textContent=s;
+    var arc=document.getElementById('arc');
+    arc.style.strokeDashoffset=194.8*(1-s/100);
+    arc.style.stroke=s>=80?'#1D9E75':s>=60?'#639922':s>=40?'#BA7517':'#E24B4A';
+    var badge=document.getElementById('sbadge');
+    badge.textContent=grade;
+    badge.className='badge '+bClass;
+    var verdict=document.getElementById('verdict');
+    verdict.className='verdict '+vClass;
+    document.getElementById('vdot').className='dot '+dClass;
+    document.getElementById('vtext').textContent=vMsg;
 
-  const rl=document.getElementById('risk-list');
-  rl.innerHTML=risks.map(r=>`<li>${r}</li>`).join('');
+    var riskData=[];
+    if(dist>10&&s<60) riskData.push('步行 '+dist+' km 超出体能建议范围，安排交通接驳');
+    if(age>=65) riskData.push('年龄偏大，随身携带应急联系卡及常用药');
+    if(ex===0&&dist>5) riskData.push('日常缺乏运动，长距离步行易致肌肉疲劳');
+    if(wx==='hot'&&s<70) riskData.push('高温天气耗体力加剧，及时补水防中暑');
+    if(wx==='rain') riskData.push('雨天路滑，穿防滑防水鞋，注意脚下安全');
+    if(riskData.length===0) riskData.push('暂无明显风险，保持良好状态');
+    document.getElementById('risks').innerHTML=riskData.map(function(r){
+      return '<div class="risk-item"><div class="risk-dot"></div><span>'+r+'</span></div>';
+    }).join('');
 
-  const cl=document.getElementById('checklist');
-  cl.innerHTML=checklist.map((item,i)=>`<li>
-    <input type="checkbox" id="ci${i}">
-    <label for="ci${i}" style="flex:1;cursor:pointer">${item.name}</label>
-    <span class="tag ${item.tag==='base'?'tag-base':'tag-dynamic'}">${item.tag==='base'?'必备':'推荐'}</span>
-  </li>`).join('');
+    var items=[
+      {n:'足量饮用水（至少500ml）',t:'base'},
+      {n:'身份证件 / 证件复印件',t:'base'},
+      {n:'手机 + 充电宝',t:'base'},
+    ];
+    if(transports.indexOf('walk')>=0||dist>3) items.push({n:'舒适防滑运动鞋',t:'dyn'});
+    if(dist>8) items.push({n:'护膝 / 护踝',t:'dyn'});
+    if(wx==='hot'){items.push({n:'防晒霜 SPF50+',t:'dyn'});items.push({n:'遮阳帽 / 太阳镜',t:'dyn'});}
+    if(wx==='rain'){items.push({n:'折叠雨伞 / 轻便雨衣',t:'dyn'});items.push({n:'防水鞋套',t:'dyn'});}
+    if(s<60){items.push({n:'能量棒 / 巧克力',t:'dyn'});items.push({n:'止痛药 / 创可贴',t:'dyn'});}
+    if(age>=60){items.push({n:'个人常用药（血压药等）',t:'dyn'});items.push({n:'紧急联系卡（病史/过敏）',t:'dyn'});}
+    if(s>=70) items.push({n:'相机 / 手机拍照支架',t:'dyn'});
 
-  const r=document.getElementById('result');
-  r.classList.remove('result-hidden');
-  r.style.opacity=0;
-  setTimeout(()=>{r.style.transition='opacity .4s';r.style.opacity=1;},10);
-  r.scrollIntoView({behavior:'smooth',block:'start'});
-}
+    document.getElementById('checklist').innerHTML=items.map(function(item,i){
+      return '<div class="list-item"><input type="checkbox" id="ci'+i+'"><label for="ci'+i+'">'+item.n+'</label><span class="tag '+(item.t==='base'?'t-base':'t-dyn')+'">'+(item.t==='base'?'必备':'推荐')+'</span></div>';
+    }).join('');
 
-function reset(){
-  document.getElementById('result').classList.add('result-hidden');
-  document.getElementById('age').value='';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+    document.getElementById('form-area').classList.add('hidden');
+    var ra=document.getElementById('result-area');
+    ra.classList.remove('hidden');
+    ra.style.opacity=0;
+    setTimeout(function(){ra.style.transition='opacity .35s';ra.style.opacity=1;},10);
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  window.rst=function(){
+    document.getElementById('result-area').classList.add('hidden');
+    document.getElementById('form-area').classList.remove('hidden');
+    document.getElementById('age').value='';
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+})();
 </script>
