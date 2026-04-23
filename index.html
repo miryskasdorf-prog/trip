@@ -1,0 +1,249 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{max-width:520px;margin:0 auto;padding:1.5rem 1rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.field{margin-bottom:.85rem}
+.field label{display:block;font-size:14px;color:var(--color-text-secondary);margin-bottom:6px}
+.field input[type=number],.field select{width:100%;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:14px}
+.radio-group,.check-group{display:flex;flex-wrap:wrap;gap:8px}
+.radio-group label,.check-group label{display:flex;align-items:center;gap:6px;font-size:13px;padding:6px 12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;color:var(--color-text-primary);transition:background .15s,border-color .15s}
+.radio-group input,.check-group input{width:14px;height:14px;accent-color:#1D9E75}
+.radio-group label:has(input:checked),.check-group label:has(input:checked){background:#E1F5EE;border-color:#1D9E75;color:#085041}
+.btn{width:100%;padding:12px;background:#1D9E75;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:15px;font-weight:500;cursor:pointer;transition:background .15s}
+.btn:hover{background:#0F6E56}
+.btn:active{transform:scale(.98)}
+.result-hidden{display:none}
+.score-ring{display:flex;justify-content:center;margin:1rem 0}
+.ring-wrap{position:relative;width:100px;height:100px}
+.ring-wrap svg{width:100px;height:100px}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ring-num{font-size:26px;font-weight:500;color:var(--color-text-primary)}
+.ring-label{font-size:11px;color:var(--color-text-secondary)}
+.grade-badge{display:inline-block;padding:4px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:.5rem}
+.grade-excellent{background:#E1F5EE;color:#085041}
+.grade-good{background:#EAF3DE;color:#27500A}
+.grade-fair{background:#FAEEDA;color:#633806}
+.grade-weak{background:#FCEBEB;color:#791F1F}
+.verdict-row{display:flex;align-items:center;gap:8px;font-size:14px;padding:10px 12px;border-radius:var(--border-radius-md);margin-bottom:.75rem}
+.verdict-ok{background:var(--color-background-success,#E1F5EE);color:var(--color-text-success,#085041)}
+.verdict-warn{background:var(--color-background-warning,#FAEEDA);color:var(--color-text-warning,#633806)}
+.verdict-danger{background:var(--color-background-danger,#FCEBEB);color:var(--color-text-danger,#791F1F)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-ok{background:#1D9E75}.dot-warn{background:#BA7517}.dot-danger{background:#E24B4A}
+.risk-list{list-style:none;font-size:13px;color:var(--color-text-secondary)}
+.risk-list li{padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.risk-list li:last-child{border:none}
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:14px}
+.checklist li:last-child{border:none}
+.checklist input[type=checkbox]{width:16px;height:16px;accent-color:#1D9E75;flex-shrink:0}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:auto;flex-shrink:0}
+.tag-base{background:#E6F1FB;color:#0C447C}
+.tag-dynamic{background:#E1F5EE;color:#085041}
+.page-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.25rem}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1rem 0}
+.bar-wrap{height:6px;background:var(--color-background-secondary);border-radius:3px;margin:12px 0 4px}
+.bar-fill{height:6px;border-radius:3px;transition:width .6s ease}
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">旅游体能评估与行李清单管理工具</h2>
+  <div class="page-title">旅游体能评估</div>
+  <div class="page-sub">导游辅助工具 · 评估游客出行能力</div>
+
+  <div class="card">
+    <div class="section-title">基本信息</div>
+    <div class="field">
+      <label>年龄</label>
+      <input type="number" id="age" min="5" max="100" placeholder="请输入年龄" />
+    </div>
+    <div class="field">
+      <label>性别</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="male" checked> 男</label>
+        <label><input type="radio" name="gender" value="female"> 女</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>日常锻炼频次</label>
+      <div class="radio-group" style="flex-direction:column;gap:6px">
+        <label><input type="radio" name="exercise" value="0" checked> 几乎不运动</label>
+        <label><input type="radio" name="exercise" value="1"> 每周 1–2 次</label>
+        <label><input type="radio" name="exercise" value="2"> 每周 3–5 次</label>
+        <label><input type="radio" name="exercise" value="3"> 每天运动</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">出行信息</div>
+    <div class="field">
+      <label>出行方式（可多选）</label>
+      <div class="check-group" style="flex-direction:column;gap:6px">
+        <label><input type="checkbox" name="transport" value="walk"> 步行为主</label>
+        <label><input type="checkbox" name="transport" value="transit"> 公交 / 地铁</label>
+        <label><input type="checkbox" name="transport" value="drive"> 自驾</label>
+        <label><input type="checkbox" name="transport" value="cable"> 缆车 / 观光车</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>景点间步行距离（公里）</label>
+      <div style="display:flex;align-items:center;gap:12px">
+        <input type="range" id="dist" min="0" max="30" value="5" step="1" style="flex:1" oninput="document.getElementById('dist-out').textContent=this.value">
+        <span id="dist-out" style="font-size:14px;font-weight:500;min-width:36px">5 km</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>当前天气</label>
+      <div class="radio-group">
+        <label><input type="radio" name="weather" value="cool" checked> 凉爽</label>
+        <label><input type="radio" name="weather" value="hot"> 炎热</label>
+        <label><input type="radio" name="weather" value="rainy"> 雨天</label>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" onclick="evaluate()">开始评估</button>
+
+  <div id="result" class="result-hidden">
+    <div style="height:1rem"></div>
+    <div class="card">
+      <div class="section-title">体能评估结果</div>
+      <div class="score-ring">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--color-border-tertiary)" stroke-width="8"/>
+            <circle id="ring-arc" cx="50" cy="50" r="42" fill="none" stroke="#1D9E75" stroke-width="8"
+              stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"
+              transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .8s ease,stroke .4s"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-num" id="score-num">0</div>
+            <div class="ring-label">体能指数</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-bottom:.75rem">
+        <span class="grade-badge" id="grade-badge">—</span>
+      </div>
+      <div id="verdict-box" class="verdict-row">
+        <div class="dot dot-ok" id="verdict-dot"></div>
+        <span id="verdict-text"></span>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="margin-bottom:.5rem">风险提示</div>
+      <ul class="risk-list" id="risk-list"></ul>
+    </div>
+
+    <div class="card">
+      <div class="section-title">旅行必备清单</div>
+      <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:.75rem">根据您的体能和行程自动生成，勾选已准备好的物品</p>
+      <ul class="checklist" id="checklist"></ul>
+    </div>
+
+    <div style="text-align:center;margin-top:.5rem">
+      <button class="btn" style="background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);font-size:13px;padding:9px" onclick="reset()">重新评估</button>
+    </div>
+    <div style="height:1.5rem"></div>
+  </div>
+</div>
+
+<script>
+document.getElementById('dist').addEventListener('input',function(){
+  document.getElementById('dist-out').textContent=this.value+' km';
+});
+
+function evaluate(){
+  const age=parseInt(document.getElementById('age').value)||30;
+  const gender=document.querySelector('input[name=gender]:checked').value;
+  const exercise=parseInt(document.querySelector('input[name=exercise]:checked').value);
+  const dist=parseInt(document.getElementById('dist').value);
+  const weather=document.querySelector('input[name=weather]:checked').value;
+  const transports=[...document.querySelectorAll('input[name=transport]:checked')].map(x=>x.value);
+
+  let score=100;
+  if(age<18) score-=5;
+  else if(age<=30) score+=0;
+  else if(age<=40) score-=5;
+  else if(age<=50) score-=12;
+  else if(age<=60) score-=22;
+  else if(age<=70) score-=35;
+  else score-=50;
+  if(gender==='female') score-=3;
+  const exBonus=[0,8,18,25];
+  score+=exBonus[exercise];
+  if(dist>3&&dist<=8) score-=5;
+  else if(dist>8&&dist<=15) score-=15;
+  else if(dist>15) score-=28;
+  score=Math.max(0,Math.min(100,score));
+
+  let grade,gradeClass,verdictClass,verdictDot,verdictText;
+  if(score>=80){grade='优秀';gradeClass='grade-excellent';verdictClass='verdict-ok';verdictDot='dot-ok';verdictText='体能良好，完全适合当前行程';}
+  else if(score>=60){grade='良好';gradeClass='grade-good';verdictClass='verdict-ok';verdictDot='dot-ok';verdictText='体能尚可，适合当前行程，注意适量休息';}
+  else if(score>=40){grade='一般';gradeClass='grade-fair';verdictClass='verdict-warn';verdictDot='dot-warn';verdictText='体能一般，建议缩短步行距离，多安排休息';}
+  else{grade='较弱';gradeClass='grade-weak';verdictClass='verdict-danger';verdictDot='dot-danger';verdictText='体能偏弱，建议以观光车/缆车代替步行为主';}
+
+  const risks=[];
+  if(dist>10&&score<60) risks.push('步行距离（'+dist+'km）超出当前体能建议范围，建议安排交通接驳');
+  if(age>=65) risks.push('年龄偏大，请随身携带应急卡及常用药物');
+  if(exercise===0&&dist>5) risks.push('日常缺乏运动，长距离步行易导致肌肉疲劳');
+  if(weather==='hot'&&score<60) risks.push('高温天气体能消耗加剧，需补充充足水分和防暑措施');
+  if(weather==='rainy') risks.push('雨天路面湿滑，注意防滑，建议穿防水运动鞋');
+  if(risks.length===0) risks.push('无明显风险，保持良好状态即可');
+
+  const checklist=[];
+  const base=[
+    {name:'足量饮用水（至少500ml）',tag:'base'},
+    {name:'身份证件 / 证件复印件',tag:'base'},
+    {name:'手机 + 充电宝',tag:'base'},
+  ];
+  checklist.push(...base);
+  if(transports.includes('walk')||dist>3) checklist.push({name:'舒适运动鞋（防滑）',tag:'dynamic'});
+  if(dist>8) checklist.push({name:'护膝 / 护踝',tag:'dynamic'});
+  if(weather==='hot') checklist.push({name:'防晒霜 SPF50+',tag:'dynamic'},{name:'遮阳帽 / 太阳镜',tag:'dynamic'});
+  if(weather==='rainy') checklist.push({name:'折叠雨伞 / 雨衣',tag:'dynamic'},{name:'防水鞋套',tag:'dynamic'});
+  if(score<60) checklist.push({name:'能量棒 / 巧克力',tag:'dynamic'},{name:'常用非处方药（止痛、创可贴）',tag:'dynamic'});
+  if(age>=60) checklist.push({name:'个人常用药（血压药等）',tag:'dynamic'},{name:'紧急联系卡（过敏/病史）',tag:'dynamic'});
+  if(score>=60) checklist.push({name:'相机 / 手机支架',tag:'dynamic'});
+
+  document.getElementById('score-num').textContent=score;
+  const offset=263.9*(1-score/100);
+  document.getElementById('ring-arc').style.strokeDashoffset=offset;
+  const colors={excellent:'#1D9E75',good:'#639922',fair:'#BA7517',weak:'#E24B4A'};
+  const ckey=score>=80?'excellent':score>=60?'good':score>=40?'fair':'weak';
+  document.getElementById('ring-arc').style.stroke=colors[ckey];
+  const badge=document.getElementById('grade-badge');
+  badge.textContent=grade;
+  badge.className='grade-badge '+gradeClass;
+  const vbox=document.getElementById('verdict-box');
+  vbox.className='verdict-row '+verdictClass;
+  document.getElementById('verdict-dot').className='dot '+verdictDot;
+  document.getElementById('verdict-text').textContent=verdictText;
+
+  const rl=document.getElementById('risk-list');
+  rl.innerHTML=risks.map(r=>`<li>${r}</li>`).join('');
+
+  const cl=document.getElementById('checklist');
+  cl.innerHTML=checklist.map((item,i)=>`<li>
+    <input type="checkbox" id="ci${i}">
+    <label for="ci${i}" style="flex:1;cursor:pointer">${item.name}</label>
+    <span class="tag ${item.tag==='base'?'tag-base':'tag-dynamic'}">${item.tag==='base'?'必备':'推荐'}</span>
+  </li>`).join('');
+
+  const r=document.getElementById('result');
+  r.classList.remove('result-hidden');
+  r.style.opacity=0;
+  setTimeout(()=>{r.style.transition='opacity .4s';r.style.opacity=1;},10);
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function reset(){
+  document.getElementById('result').classList.add('result-hidden');
+  document.getElementById('age').value='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
